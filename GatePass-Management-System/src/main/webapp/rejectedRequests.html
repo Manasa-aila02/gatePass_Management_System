@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rejected Requests</title>
+    <link rel="stylesheet" href="css/adminstyles.css">
+    <style>
+        /* Main content styles */
+        main {
+            flex: 1;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        main h2 {
+            color: #333;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #004080;
+            color: white;
+        }
+
+        /* Footer styles */
+        footer {
+            background-color: #004080;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            fetch('rejectedRequests')
+                .then(response => response.json())
+                .then(requests => {
+                    const resultsTable = document.getElementById('results');
+                    requests.forEach(request => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${request.requestId}</td>
+                            <td>${request.rollNo}</td>
+                            <td>${request.name}</td>
+                            <td>${request.branch}</td>
+                            <td>${request.dateOfRequest}</td>
+                            <td>${request.reason}</td>
+                            <td>${request.adminId}</td>
+                        `;
+                        resultsTable.appendChild(row);
+                    });
+                })
+                .catch(error => console.error('Error fetching approved requests:', error));
+        };
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Admin Dashboard</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="adminDashboard.html">Home</a></li>
+            <li><a href="allRequests.html">Requests</a></li>
+            <li><a href="pendingRequests.html">Pending Requests</a></li>
+            <li><a href="approvedRequests.html">Approved Requests</a></li>
+            <li><a href="rejectedRequests.html">Rejected Requests</a></li>
+            <li><a href="addAdmin.html">Add Admin</a></li>
+            <li><a href="index.html">Logout</a></li>
+        </ul>
+    </nav>
+    <main>
+        <h2>Rejected Requests</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Request ID</th>
+                    <th>Roll Number</th>
+                    <th>Name</th>
+                    <th>Branch</th>
+                    <th>Date of Rejection</th>
+                    <th>Reason</th>
+                    <th>Admin ID</th>
+                </tr>
+            </thead>
+            <tbody id="results">
+                <!-- Example data, replace with actual data -->
+            </tbody>
+        </table>
+    </main>
+    <footer>
+        <p>&copy; 2024 Gate Pass Management System</p>
+    </footer>
+</body>
+</html>

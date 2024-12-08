@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+	<style>
+	body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+/* Main content styles */
+main {
+    padding: 40px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+}
+
+.h2-header{
+    padding: 20px 0;
+    font-size: 1.5em;
+	background-color:#004080;
+	text-align:center;
+	color:white;
+	margin:0px 0px 15px 0px ;
+}
+
+
+.container {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 600px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .card form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card label {
+            margin-top: 10px;
+            color: #555;
+        }
+
+        .card input,
+        .card select {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+        }
+
+        .card button {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            background-color: #004080;
+            font-size: 1em;
+            cursor: pointer;
+        }
+
+        .card button:hover {
+            background-color: #007bff;
+        }
+
+        .card p {
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .card a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .card a:hover {
+            text-decoration: underline;
+        }
+        
+        .error-message {
+            color: red;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        </style>
+        <script>
+        window.onload = function() {
+            var urlParams = new URLSearchParams(window.location.search);
+            var errorMessage = urlParams.get('error');
+            if (errorMessage) {
+                document.getElementById('error-message').innerText = errorMessage;
+            }
+        };
+    </script>
+   
+</head>	
+<body>
+    <main>
+        <div class="container">
+            <div class="card">
+            <div id="error-message" class="error-message"></div>
+            <header class="h2-header">LOGIN FORM</header>
+                <form action="login" method="POST">
+                	<label for="id">Id:</label>
+                    <input type="text" id="id" name="id" required>
+                    
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+
+                    <label for="role">Role:</label>
+                    <select id="role" name="role" required>
+                        <option value="student">Student</option>
+                        <option value="admin">Admin</option>
+                    </select>
+
+                    <button type="submit">Login</button>
+                    <p>Don't have an account? <a href="register.html">Register here</a></p>
+                </form>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

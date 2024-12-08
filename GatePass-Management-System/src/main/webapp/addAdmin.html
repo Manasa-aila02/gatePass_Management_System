@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Admin</title>
+    <link rel="stylesheet" href="css/adminstyles.css">
+    <style>
+    /* Main content styling */
+	main {
+            flex: 1;
+            padding: 10px 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .main-content {
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 600px;
+            width: 100%;
+        }
+        
+        label {
+            margin: 5px 0 5px;
+            font-size: 1.2em;
+        }
+        
+        
+        button {
+            padding: 10px 20px;
+            color: white;
+            background-color: #004080;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #007bff;
+        }
+        
+         .error-message {
+            color: red;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            var urlParams = new URLSearchParams(window.location.search);
+            var error = urlParams.get('error');
+            var Message = urlParams.get('message');
+            if (Message) {
+                document.getElementById('error-message').innerText = Message;
+            }
+            if(error){
+            	 document.getElementById('error-message').innerText = error;
+            }
+        };
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Admin Dashboard</h1>
+    </header>
+    <nav>
+        <ul>
+        	<li><a href="adminDashboard.html">Home</a></li>
+            <li><a href="allRequests.html">Requests</a></li>
+            <li><a href="pendingRequests.html">Pending Requests</a></li>
+            <li><a href="approvedRequests.html">Approved Requests</a></li>
+            <li><a href="rejectedRequests.html">Rejected Requests</a></li>
+            <li><a href="addAdmin.html">Add Admin</a></li>
+            <li><a href="index.html">Logout</a></li>
+        </ul>
+    </nav>
+    <main>
+    	<div class="main-content">
+    	<div id="error-message" class="error-message"></div>
+        <h2>Add a New Admin</h2>
+        <form action="addAdminServlet" method="post">
+            <label for="adminId">Admin ID:</label>
+            <input type="text" id="adminId" name="adminId" required><br><br>
+            <label for="adminName">Admin Name:</label>
+            <input type="text" id="adminName" name="adminName" required><br><br>
+            <label for="adminPassword">Password:</label>
+            <input type="password" id="adminPassword" name="adminPassword" required><br><br>
+            <button type="submit" >Add Admin</button>
+        </form>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Gate Pass Management System</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Gate Pass</title>
+    <link rel="stylesheet" href="css/studentstyles.css">
+    <style>
+        /* Main content styles */
+        main {
+            flex: 1;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        main h2 {
+            color: #333;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #004080;
+            color: white;
+        }
+
+        /* Footer styles */
+        footer {
+            background-color: #004080;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+    </style>
+    <script>
+	    window.onload = function() {
+	        fetch('trackGatePass')
+	            .then(response => {
+	                if (!response.ok) {
+	                    throw new Error('Network response was not ok');
+	                }
+	                return response.json();
+	            })
+	            .then(requests => {
+	                console.log("Fetched Requests: ", requests); // Debugging line
+	                const resultsTable = document.getElementById('results');
+	                requests.forEach(request => {
+	                    const row = document.createElement('tr');
+	                    row.innerHTML = `
+	                        <td>${request.requestId}</td>
+	                        <td>${new Date(request.dateOfRequest).toLocaleDateString()}</td> <!-- Formatting date -->
+	                        <td>${request.reason}</td>
+	                        <td>${request.status}</td>
+	                        <td>${request.adminId}</td>
+	                    `;
+	                    resultsTable.appendChild(row);
+	                });
+	            })
+	            .catch(error => console.error('Error fetching requests:', error));
+	    };
+
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Student Dashboard</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="studentDashboard.html">Home</a></li>
+            <li><a href="requestGatePass.html">Request Gate Pass</a></li>
+            <li><a href="trackGatePass.html">Track Request Status</a></li>
+            <li><a href="index.html">Logout</a></li>
+        </ul>
+    </nav>
+    <main>
+        <h2>Your Gate Pass Requests</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Request ID</th>
+                    <th>Date of Request</th>
+                    <th>Reason</th>
+                    <th>Status</th>
+                    <th>Admin ID</th>
+                </tr>
+            </thead>
+                        <tbody id="results">
+                <!-- Fetched requests will be appended here by the script -->
+            </tbody>
+        </table>
+    </main>
+    <footer>
+        <p>&copy; 2024 Gate Pass Management System</p>
+    </footer>
+</body>
+</html>
+            
